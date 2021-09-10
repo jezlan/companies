@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $("#dd").focus();
+    });
+</script>
+<h1 align="center">Admin Login...!</h1>
+<form action="loginfunc" method="post">
+    {% csrf_token %}
+    <table align="center" id="customersnob">
+        <tr><td>User Name</td><td> : <input type="text" name="usname" placeholder="Enter your username.." id="dd"></td></tr>
+        <tr><td>Password</td><td> : <input type="text" name="pswd" placeholder="Enter your password.."></td></tr>
+        <tr><td colspan="2" align="center"><input type="submit" value="Login" class="button button2"></td></tr>
+<!--        <tr><td colspan="2" align="center">Don't have an account <a href="">Sign up</a> </td></tr>-->
+    </table>
+</form>
+{% endblock %}

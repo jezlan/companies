@@ -1,0 +1,154 @@
+{% extends 'applcanthome.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $("#dd").focus();
+    });
+</script>
+<h1 align="center">Register Here....!</h1>
+<form method="post" action="/usrupdating" >
+    {% csrf_token %}
+    <table align="center" id="customers">
+        <input type="text" name="id" value="{{data.id}}" hidden>
+        <tr><td>Name</td><td>: <input type="text" name="name" placeholder="Enter your name..." value="{{data.name}}" id="dd"></td></tr>
+        <tr><td></td></tr>
+        <tr><td>Ph.No</td><td>: <input type="number" name="phno" id="phnum" placeholder="Enter your number.." value="{{data.phno}}"><br><p id="crtphnum"></p></td></tr>
+        <tr><td>gender</td><td><input name="gender" type="radio" value="male" {% if data.gender == "male" %} checked {% endif %} >Male
+            <input type="radio" name="gender" value="female" {% if data.gender == "female" %} checked {% endif %} > Female</td></tr>
+        <tr><td>Address</td><td><textarea name="addrs" placeholder="enter address">{{data.address}}</textarea> </td></tr>
+        <tr><td>Email</td><td>: <input type="email" name="email" id="email" placeholder="Enter your email.." value="{{data.email}}"><br><p id="cremail"></p></td></tr>
+        <tr><td>User Name</td><td>: <input type="text" name="usname" id="un" placeholder="Enter a username.." value="{{lob.username}}"><br><p id="message"></p></td></tr>
+        <tr><td>Password </td><td>: <input type="password" name="pswd" id="pwd" placeholder="Enter a password.." value="{{lob.password}}"><br><p id="passwd"></p></td></tr>
+        <tr><td>Confirm password</td><td>: <input type="password" name="cnfpswd" id="cnfpwd" placeholder="Re-Enter your password.."><br><p id="cnfmpasswd"></p></td></tr>
+        <tr><td colspan="2" align="center"><input type="submit" value="Update" class="button button2"></td></tr>
+    </table>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    $("#phnum").keyup(function(){
+    var catid;
+    catid = $(this).val();
+
+$.ajax(
+    {
+        type:"GET",
+        url: "/likePhoneappl",
+        data:{
+                 post_id: catid
+        },
+        success: function( data )
+        {
+        if (data.is_taken) {
+
+                    $( '#crtphnum' ).text(data.error_message);
+                  }
+                  else
+                  {
+                  $( '#crtphnum' ).text("");
+                  }
+
+        }
+     })
+});
+
+     $("#email").keyup(function(){
+    var catid;
+    catid = $(this).val();
+
+$.ajax(
+    {
+        type:"GET",
+        url: "/likeEmailappl",
+        data:{
+                 post_id: catid
+        },
+        success: function( data )
+        {
+        if (data.is_taken) {
+
+                    $( '#cremail' ).text(data.error_message);
+                  }
+                  else
+                  {
+                  $( '#cremail' ).text("");
+                  }
+
+        }
+     })
+});
+
+
+    $("#un").keyup(function(){
+    var catid;
+    catid = $(this).val();
+
+$.ajax(
+    {
+        type:"GET",
+        url: "/likePost",
+        data:{
+                 post_id: catid
+        },
+        success: function( data )
+        {
+        if (data.is_taken) {
+
+                    $( '#message' ).text(data.error_message);
+                  }
+                  else
+                  {
+                  $( '#message' ).text("");
+                  }
+
+        }
+     })
+});
+
+$("#pwd").keyup(function(){
+    var passwd;
+    passwd = $(this).val();
+
+$.ajax(
+    {
+        type:"GET",
+        url: "/pwdck",
+        data:{
+                 pswd: passwd,
+
+        },
+        success: function( data )
+        {
+       $( '#passwd' ).text(data);
+
+        }
+     })
+});
+$("#cnfpwd").keyup(function(){
+    var passwd,passwd1;
+    passwd = $(this).val();
+    passwd1=$("#pwd").val();
+
+$.ajax(
+    {
+        type:"GET",
+        url: "/confpswd",
+        data:{
+                 pswd: passwd,
+                 cnfpwd:passwd1,
+
+        },
+        success: function( data )
+        {
+       $( '#cnfmpasswd' ).text(data);
+
+        }
+     })
+});
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'applcanthome.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $("#dd").focus();
+    });
+</script>
+<form method="post"action="/qualpgadding">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Qualification Details :-</legend>
+        <h2 align="center">Enter your Post Graduation details Details</h2>
+        <input type="text" name="cls" value="Post Graduation" hidden>i
+    <table align="center" id="customersnob">
+         <tr><td>Department</td><td><select name="qualify" id="dd">
+            <option value="Msc cs">Msc Computer science</option>
+            <option value="MCA">MCA</option>
+             <option value="M.tech CS">M.tech CS</option>
+        </select></td></tr>
+        <tr><td>Year of pass</td><td><select name="year">
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+             <option value="2019">2019</option>
+             <option value="2018">2018</option>
+             <option value="2017">2017</option>
+             <option value="2016">2016</option>
+             <option value="2015">2015</option>
+             <option value="2014">2014</option>
+             <option value="2013">2013</option>
+             <option value="2012">2012</option>
+             <option value="2011">2011</option>
+             <option value="2010">2010</option>
+        </select></td></tr>
+        <tr><td>Institution</td><td><input type="text" name="inst" placeholder="enter your institution name"></td></tr>
+        <tr><td>percentage of Mark you obtained</td><td><input type="number" name="permark" value=""></td></tr>
+        <tr><td colspan="2" align="right"><input type="submit" value="Finish" class="button button2"></td> </tr>
+    </table>
+    </fieldset>
+
+
+</form>
+{% endblock %}

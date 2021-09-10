@@ -1,0 +1,24 @@
+{% extends 'adminhome.html' %}
+{% block body %}
+<h1 align="center">Companies</h1>
+<table border="1" align="center" id="customers">
+  <tr>
+    <th>Company Name</th>
+    <th>Email</th>
+    <th>Description</th>
+    <th>Ph.No</th>
+    <th>Address</th>
+    <th></th>
+  </tr>
+  {% for d in data %}
+  <tr>
+     <td>{{d.name}}</td>
+     <td>{{d.email}}</td>
+     <td>{{d.description}}</td>
+     <td>{{d.phno}}</td>
+     <td>{{d.address}}</td>
+     <td><td><a href="{% url 'deletecompany' id=d.lid_id %}"><input type="button" value="Delete" class="button button2"></a></td></td>
+  </tr>
+  {%endfor%}
+</table>
+{% endblock %}

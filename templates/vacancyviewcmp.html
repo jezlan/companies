@@ -1,0 +1,30 @@
+{% extends 'companyhome.html' %}
+{% block body %}
+<h1 align="center">Vacancies</h1>
+<table border="1" align="center" id="customers">
+  <tr>
+<!--    <th>Company Name</th>-->
+    <th>No.of vacancies </th>
+    <th>Job details</th>
+    <th>Qualification Required</th>
+    <th>Salary</th>
+    <th>Experiance required</th>
+    <th>Updated date</th>
+    <th>status</th>
+    <th></th>
+  </tr>
+  {% for d in data %}
+  <tr>
+<!--     <td>{{d.cmp_id.name}}</td>-->
+     <td>{{d.noofvaccany}}</td>
+     <td>{{d.jobdetail}}</td>
+     <td>{{d.qualification}}</td>
+     <td>{{d.salary}}</td>
+    <td>{{d.Experiance}}</td>
+    <td>{{d.date}}</td>
+    <td>{{d.status}}</td>
+    <td><a href="{% url 'updatevacancy' id=d.id %}"><input type="button" value="update" class="button button1" class="button button2"></a></td>
+  </tr>
+  {%endfor%}
+</table>
+{% endblock %}

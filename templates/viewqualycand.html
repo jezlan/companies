@@ -1,0 +1,29 @@
+{% extends 'adminhome.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    window.location.hash="#dd";
+    });
+</script>
+<div id="dd"></div>
+<br><br><br>
+<fieldset>
+    <legend><h2>Qualification</h2></legend>
+    <table align="center" border="1" id="customers"><tr>
+        <th></th>
+        <th>Syllabus/Department </th>
+        <th>Year of Pass</th>
+        <th>Institution </th>
+        <th>Percentage of mark </th></tr>
+        {% for d in data %}
+        <tr>
+            <td>{{d.clas}}</td>
+            <td>{{d.Department}}</td>
+            <td>{{d.yopass}}</td>
+            <td>{{d.institution}}</td>
+            <td>{{d.perofmark}} %</td>
+        </tr>
+        {%endfor%}
+    </table></fieldset><br><br>
+{% endblock %}

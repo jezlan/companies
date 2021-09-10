@@ -1,0 +1,66 @@
+{% extends 'applcanthome.html' %}
+{% block body %}
+
+<br><br>
+<fieldset>
+    <legend><h2>Qualification</h2></legend>
+    <table align="center" border="1" id="customers"><tr>
+        <th></th>
+        <th>Syllabus/Department </th>
+        <th>Year of Pass</th>
+        <th>Institution </th>
+        <th>Percentage of mark </th>
+        <th></th>
+    </tr>
+        {% for d in data %}
+        <tr>
+            <td>{{d.clas}}</td>
+            <td>{{d.Department}}</td>
+            <td>{{d.yopass}}</td>
+            <td>{{d.institution}}</td>
+            <td>{{d.perofmark}} %</td>
+            <td><a href="{% url 'qualyupdatepg' id=d.id%}"><input type="button" value="edit"></a> </td>
+        </tr>
+        {%endfor%}
+
+        </table></fieldset><br><br>
+<fieldset>
+    <legend><h2>Experience</h2></legend>
+<table border="1" align="center" id="customers">
+  <tr>
+    <th>Company Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+      <th></th>
+  </tr>
+  {% for d in exp %}
+<!--    <script type="javascript">-->
+<!--        var fdate=new Date("{{d.strtdate}}");-->
+<!--        var edate=new Date("{{d.enddate}}");-->
+<!--        var days=fdate.getTime()-edate.getTime();-->
+<!--    </script>-->
+  <tr>
+     <td>{{d.companynme}}</td>
+     <td>{{d.strtdate}}</td>
+     <td>{{d.enddate}}</td>
+     <td><a href="{% url 'expupdatepg' id=d.id %}"><input type="button" value="edit"></a> </td>
+  </tr>
+  {%endfor%}
+</table>
+    <a href="/exprnaddpg"><input type="button" value="Add Experiance"></a>
+</fieldset>
+<br><br>
+<fieldset>
+    <legend><h2>Personal details</h2></legend>
+    <table align="center" id="customersnob"><tr>
+        <td><b>Name  </b> </td><td>: {{n.name}}</td></tr>
+        <tr><td><b>Ph.no  </b></td><td>:  {{n.phno}}</td></tr>
+        <tr><td><b>Email  </b></td> <td>: {{n.email}}</td></tr>
+        <tr><td><b>Gender </b></td><td>:  {{n.gender}}</td></tr>
+        <tr><td><b>Address </b></td><td>:  {{n.address}}</td></tr>
+        <tr><td><a href="{% url 'userupdatepg' id=n.id %}"><input type="button" value="edit"></a> </td></tr>
+    </table>
+
+</fieldset><br>
+
+{% endblock %}

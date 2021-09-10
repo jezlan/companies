@@ -1,0 +1,31 @@
+{% extends 'adminhome.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    window.location.hash="#dd";
+    });
+</script>
+<div id="dd"></div><br><br><br>
+<h1 align="center">Companies</h1>
+<table border="1" align="center" id="customers">
+  <tr>
+    <th>Company Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </tr>
+  {% for d in data %}
+<!--    <script type="javascript">-->
+<!--        var fdate=new Date("{{d.strtdate}}");-->
+<!--        var edate=new Date("{{d.enddate}}");-->
+<!--        var days=fdate.getTime()-edate.getTime();-->
+<!--    </script>-->
+  <tr>
+     <td>{{d.companynme}}</td>
+     <td>{{d.strtdate}}</td>
+     <td>{{d.enddate}}</td>
+      <td></td>
+  </tr>
+  {%endfor%}
+</table>
+{% endblock %}

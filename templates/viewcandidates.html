@@ -1,0 +1,29 @@
+{% extends 'adminhome.html' %}
+{% block body %}
+<h1 align="center">Candidates</h1>
+<table border="1" align="center" id="customers">
+  <tr>
+    <th>Candidate Name</th>
+    <th>Email</th>
+    <th>Gender</th>
+    <th>Ph.No</th>
+    <th>Address</th>
+      <th>Experience</th>
+      <th>Qualification</th>
+
+  </tr>
+  {% for d in data %}
+  <tr>
+     <td>{{d.name}}</td>
+     <td>{{d.email}}</td>
+     <td>{{d.gender}}</td>
+     <td>{{d.phno}}</td>
+     <td>{{d.address}}</td>
+      <td><a href="{% url 'viewexpcand' id=d.lid_id %}"><input type="button" value="Click to view experience" class="button button2"></a></td>
+     <td><a href="{% url 'viewqualycand' id=d.lid_id %}"><input type="button" value="Click to view Qualification" class="button button2"></a></td>
+      <td><a href="{% url 'deleteusr' id=d.lid_id %}"><input type="button" value="Delete" class="button button2"></a></td>
+
+  </tr>
+  {%endfor%}
+</table>
+{% endblock %}

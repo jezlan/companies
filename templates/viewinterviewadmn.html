@@ -1,0 +1,14 @@
+{% extends 'adminhome.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    window.location.hash="#dd";
+    });
+</script>
+<div id="dd"></div><br><br><br>
+<table id="customers">
+    <tr><td>Place</td><td><h3> {{data.place}}</h3></td></tr>
+    <tr><td>Date</td><td><b> {{data.date}}</b></td></tr>
+  <tr><td>Time</td><td><b> {{data.time}}</></td></tr></table>
+{% endblock %}

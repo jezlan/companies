@@ -1,0 +1,32 @@
+{% extends 'adminhome.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    window.location.hash="#dd";
+    });
+</script>
+<div id="dd"></div><br><br>
+<h1 align="center">Companies</h1>
+<table border="1" align="center" id="customers">
+  <tr>
+    <th>Candidate name</th>
+
+    <th>Status</th>
+    <th>date</th>
+      <th>Interview details</th>
+
+
+  </tr>
+  {% for d in data %}
+  <tr>
+     <td>{{d.aid.name}}</td>
+
+     <td>{{d.status}}</td>
+     <td>{{d.date}}</td>
+      <td>{% if d.status == "Accepted" %}<a href="{% url 'viewinterviewdetad' id=d.id %}">Click to view details</a>{% elif d.status == "Rejected" %}
+          Better luck next time.. Keep trying.. {% else %}Pending.... {% endif %} </td>
+  </tr>
+  {%endfor%}
+</table>
+{% endblock %}

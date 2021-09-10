@@ -1,0 +1,17 @@
+{% extends 'applcanthome.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    window.location.hash="#dd";
+    });
+</script>
+<div id="dd"></div>
+<br><br><br><br>
+    <h2>Congratulations <b><i>{{data.apid.aid.name}}</i></b> ... . You are selected for interview.....</h2>
+<table id="customers">
+    <tr><td>Place</td><td>:</td><th><h2>{{data.place}}</h2></th></tr>
+    <tr><td>Date</td><td>:</td><th>{{data.date}}</th></tr>
+    <tr><td>Time</td><td>:</td><th>{{data.time}}</th></tr></table>
+
+{% endblock %}

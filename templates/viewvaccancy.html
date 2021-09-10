@@ -1,0 +1,88 @@
+{% extends 'applcanthome.html' %}
+{% block body %}
+<h3 align="center">
+    <input type="text" name="srhname" id="s" placeholder="Enter a post to search..." ></h3>
+
+<div id="uv">
+  {% for d in datass %}
+<fieldset>
+  <legend>{% if d.status == "needed" %} <p style="color:green;font-size: 25px;">Available</p>{% else %} <p style="color:red;font-size: 25px;">Not Available</p>{% endif %}
+  </legend>
+  <table id="customersnob">
+    {% if d.status == "needed" %} <marquee style="color:green;font-size: 15px;">Hurry up ...! only {{d.noofvaccany}} vacancies left </marquee>{% else %} <marquee style="color:red;font-size: 15px;">Sorry.. No Vacancies left . Available soon...</marquee>{% endif %}
+    <tr><td>Name of company</td><th>&nbsp;&nbsp;<h2>{{d.cmp_id.name}}</h2><h6>({{d.cmp_id.description}})</h6></th></tr>
+    <tr><td>Post</td><th>&nbsp;&nbsp;{{d.jobdetail}}</th></tr>
+    <tr><td>Qualification required</td><th>&nbsp;&nbsp;{{d.qualification}}</th></tr>
+      <tr><td>Vacancy </td><th>&nbsp;&nbsp;{{d.noofvaccany}} vacancies left</th></tr>
+      <tr><td>Updated date </td><th>&nbsp;&nbsp;{{d.date}}</th></tr>
+      <tr><td>Salary</td><th>&nbsp;&nbsp;₹ {{d.salary}}</th></tr>
+      <tr><td>Experiance </td><th>&nbsp;&nbsp;{{d.Experiance}} years</th></tr>
+      <tr><td colspan="2" align="center">{% if d.id not in lvid %}<a href="{% url 'apply' id=d.id %}"><input type="button" value="Apply" class="button button2"></a> {% else %}
+      <a href="{% url 'cancel' id=d.id %}"><input type="button" value="Cancel" class="button button2" ></a>{% endif %}</td></tr>
+  </table>
+</fieldset><br><br>
+  {%endfor%}
+     </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+    $("#s").keyup(function(){
+    var sd;
+    sd = $(this).val();
+
+$.ajax(
+    {
+        type:"GET",
+        url: "/search",
+        data:{
+                 searchdata: sd
+        },
+        success: function( data )
+        {
+        var tab='';
+        for (var d=0, l=data.res.length; d<l; d++)
+    {
+    tab=tab+'<fieldset>';
+    if(data.res[d].status=="needed"){
+    tab=tab+'<legend><p style="color:green;font-size: 25px;">Available</p></legend>';
+    }
+    else{
+    tab=tab+'<legend><p style="color:red;font-size: 25px;">Not Available</p></legend>';
+    }
+    tab=tab+'<table id="customersnob">';
+    if(data.res[d].status=="needed"){
+    tab=tab+'<marquee style="color:green;font-size: 15px;">Hurry up ...! only'+data.res[d].noofvaccany+' vacancies left </marquee>';
+    }
+    else{
+     tab=tab+'<marquee style="color:red;font-size: 15px;">Sorry.. No Vacancies left . Available soon...</marquee>';
+     }
+     tab=tab+'<tr><td>Name of company</td><th>&nbsp;&nbsp;<h2>'+data.res[d].cmpidname+'</h2></th></tr>';
+     tab=tab+'<tr><td>Post</td><th>&nbsp;&nbsp;'+data.res[d].jobdetail+'</th></tr>';
+     tab=tab+'<tr><td>Qualification required</td><th>&nbsp;&nbsp;'+data.res[d].qualification+'</th></tr>';
+     tab=tab+'<tr><td>Vacancy </td><th>&nbsp;&nbsp;'+data.res[d].noofvaccany+' vacancies left</th></tr>';
+     tab=tab+'<tr><td>Updated date </td><th>&nbsp;&nbsp;'+data.res[d].date+'</th></tr>';
+     tab=tab+'<tr><td>Salary</td><th>&nbsp;&nbsp;₹'+data.res[d].salary+'</th></tr>';
+     tab=tab+'<tr><td>Experiance </td><th>&nbsp;&nbsp;'+data.res[d].Experiance+' years</th></tr>';
+     if(data.res[d].apid==1){
+     tab=tab+'<tr><td colspan="2" align="center"><a href="apply/'+data.res[d].id+'"><input type="button" value="Apply" class="button button2"></a></td></tr>';
+     }
+      else
+      {
+      tab=tab+'<tr><td colspan="2" align="center"><a href="cancel/'+data.res[d].id+'"><input type="button" value="Cancel" class="button button2" ></a></td></tr>';
+      }
+     tab=tab+'</table>';
+     tab=tab+'</fieldset><br><br>';
+     }
+
+
+                    document.getElementById('uv').innerHTML=tab;
+
+
+        }
+     })
+});
+
+
+</script>
+{% endblock %}

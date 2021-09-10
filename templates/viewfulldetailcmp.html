@@ -1,0 +1,71 @@
+{% extends 'companyhome.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    window.location.hash="#dd";
+    });
+</script>
+<br><br>
+<div id="dd"></div><br>
+<fieldset>
+    <legend><h2>Qualification</h2></legend>
+    <table align="center" border="1" id="customers"><tr>
+        <th></th>
+        <th>Syllabus/Department </th>
+        <th>Year of Pass</th>
+        <th>Institution </th>
+        <th>Percentage of mark </th></tr>
+        {% for d in data %}
+        <tr>
+            <td>{{d.clas}}</td>
+            <td>{{d.Department}}</td>
+            <td>{{d.yopass}}</td>
+            <td>{{d.institution}}</td>
+            <td>{{d.perofmark}} %</td>
+        </tr>
+        {%endfor%}
+
+        </table></fieldset><br><br>
+<fieldset>
+    <legend><h2>Experience</h2></legend>
+<table border="1" align="center" id="customers">
+  <tr>
+    <th>Company Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </tr>
+  {% for d in exp %}
+<!--    <script type="javascript">-->
+<!--        var fdate=new Date("{{d.strtdate}}");-->
+<!--        var edate=new Date("{{d.enddate}}");-->
+<!--        var days=fdate.getTime()-edate.getTime();-->
+<!--    </script>-->
+  <tr>
+     <td>{{d.companynme}}</td>
+     <td>{{d.strtdate}}</td>
+     <td>{{d.enddate}}</td>
+      <td></td>
+  </tr>
+  {%endfor%}
+</table>
+</fieldset>
+<br><br>
+<fieldset>
+    <legend><h2>Personal details</h2></legend>
+    <table align="center" id="customersnob"><tr>
+        <td><b>Name  </b> </td><td>: {{n.name}}</td></tr>
+        <tr><td><b>Ph.no  </b></td><td>:  {{n.phno}}</td></tr>
+        <tr><td><b>Email  </b></td> <td>: {{n.email}}</td></tr>
+        <tr><td><b>Gender </b></td><td>:  {{n.gender}}</td></tr>
+        <tr><td><b>Address </b></td><td>:  {{n.address}}</td></tr>
+    </table>
+
+</fieldset><br>
+<table align="center">
+    <tr>
+        <td colspan="2" align="center">{% if apl.status == "Accepted" %} <p>You accepted this profile..</p>{% elif apl.status == "Rejected" %}<p> You Rejected this profile</p> {% else %} <a href="{% url 'accept' %}"><input type="button" value="Accept" class="button button2"></a>&nbsp;&nbsp;
+             <a href="{% url 'reject' %}"><input type="button" value="Reject" class="button button2"></a> {% endif %}</td>
+    </tr>
+</table>
+{% endblock %}

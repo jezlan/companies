@@ -1,0 +1,27 @@
+{% extends 'applcanthome.html' %}
+{% block body %}
+<h1 align="center">Companies</h1>
+<table border="1" align="center" id="customers">
+  <tr>
+    <th>Company Name</th>
+
+    <th>Status</th>
+    <th>date</th>
+      <th>Interview details</th>
+
+
+  </tr>
+  {% for d in datass %}
+  <tr>
+     <td>{{d.vid.cmp_id.name}}</td>
+
+     <td>{{d.status}}</td>
+     <td>{{d.date}}</td>
+      <td>{% if d.status == "Accepted" %}<a href="{% url 'viewinterviewdet' id=d.id %}">Click to view details</a>{% elif d.status == "Rejected" %}
+          Better luck next time.. Keep trying.. {% else %}Pending.... {% endif %} </td>
+
+
+  </tr>
+  {%endfor%}
+</table>
+{% endblock %}

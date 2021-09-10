@@ -1,0 +1,23 @@
+{% extends 'applcanthome.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $("#dd").focus();
+    });
+</script>
+<form method="post" action="/exprupdating">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Experiance Details :-</legend>
+    <table id="customersnob">
+        <input type="text" name="id" value="{{data.id}}" hidden>
+        <tr><td>Company name</td><td><input type="text" name="cmpnme" value="{{data.companynme}}" id="dd"></td></tr>
+        <tr><td>Starting date</td><td>: {{data.strtdate}}<input type="date" name="strtdate" ></td></tr>
+        <tr><td>Ending date</td><td>: {{data.enddate}}<input type="date" name="enddate" ></td></tr>
+        <tr><td colspan="2"><input type="submit"  name="button" value="Update" class="button button2"></td></tr>
+    </table>
+    </fieldset>
+</form>
+{% endblock %}

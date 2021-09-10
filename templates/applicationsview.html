@@ -1,0 +1,77 @@
+{% extends 'companyhome.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    window.location.hash="#dd";
+    });
+</script>
+<div id="dd"></div>
+<h1 align="center">Companies</h1>
+<select name="post" class="select" id="question_subject">
+    <option>Select a post to filter</option>
+    {% for d in vob %}
+    <option value="{{d.jobdetail}}">{{d.jobdetail}}</option>
+    {% endfor %}
+</select>
+<br><br><br>
+<div id="uv">
+<table border="1" align="center" id="customers">
+  <tr>
+    <th>Candidate Name</th>
+      <th>Post</th>
+    <th>Status</th>
+    <th>date</th>
+      <th>Experience</th>
+
+
+  </tr>
+  {% for d in data %}
+  <tr>
+     <td>{{d.aid.name}}</td>
+      <td>{{d.vid.jobdetail}}</td>
+     <td>{{d.status}}</td>
+     <td>{{d.date}}</td>
+
+     <td><a href="{% url 'viewqualycmp' id=d.id %}"><input type="button" value="Click to view Full details" class="button button2"></a></td>
+
+  </tr>
+  {%endfor%}
+</table></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+    $("#question_subject").change(function(){
+    const sd = $(this).val();
+
+$.ajax(
+    {
+        type:"GET",
+        url: "/searchapplication",
+        data:{
+                 searchdata: sd
+        },
+        success: function( data )
+        {
+        var tab;
+        tab='<table border="1" align="center" id="customers">    <tr>        <th>Candidate Name</th><th>Post</th><th>Status</th><th>date</th><th>Experience</th>    </tr>';
+
+        for (var i=0, l=data.res.length; i<l; i++)
+    {
+    tab=tab+'<tr> <td>'+data.res[i].name+'</td><td>'+data.res[i].jobdetail+'</td><td>'+data.res[i].status+'</td><td>'+data.res[i].date+'</td><td><a href="viewqualycmp/'+data.res[i].id+'"><input type="button" value="Click to view Full details" class="button button2"></a></td></tr>';
+
+    }
+    tab=tab+'</table>'
+
+
+                    document.getElementById('uv').innerHTML=tab;
+
+
+        }
+     })
+});
+
+</script>
+
+{% endblock %}

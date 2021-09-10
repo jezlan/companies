@@ -1,0 +1,32 @@
+{% extends 'companyhome.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $("#dd").focus();
+    });
+</script>
+<form method="post" action="/vacancypdate" >
+  {% csrf_token %}
+  <table id="customersnob">
+    <tr><input type="text" name="id" value="{{data.id}}" hidden></tr></hidden>
+    <tr>
+      <td>No.of Vaccancies</td><td><input type="number" name="noofvac" placeholder="Enter the total no.of vaccancies available.. " value="{{data.noofvaccany}}" id="dd"></td>
+    </tr>
+      <tr><td> Job details</td><td>:<input type="text" name="jbdet" placeholder="Enter job name" value="{{data.jobdetail}}"></td></tr>
+      <tr><td>Qualification</td><td>:<input type="text" name="qlfreq" placeholder="Enter Qualifications required.." value="{{data.qualification}}"></td></tr>
+      <tr><td>Salary</td><td><input type="number" name="slary" placeholder="Enter Salary amount" value="{{data.salary}}"></td></tr>
+    <tr><td>Status</td><td><select name="sts" >
+      <option>Select new status</option>
+      <option value="needed" {% if data.status == "needed" %} selected {% endif %}>Needed</option>
+      <option value="not needed" {% if data.status == "not needed" %} selected {% endif %}>Not Needed</option>
+    </select></td>
+
+</td></tr>
+      <tr><td>Experiance </td><td><input type="number" name="exp" placeholder="enter experiance required" value="{{data.Experiance}}"></tr>
+      <tr><td><input type="submit" value="update" class="button button2"></td></tr>
+  </table>
+</form>
+
+{% endblock %}
